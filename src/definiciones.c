@@ -47,9 +47,15 @@ double alpha (double rho_o,double ka_o,double kd_o,double rho_h,double v_h,doubl
  return(alpha);
 }
 
-double fhap(double alpha){
-	fhap=
+double fhap_a(double alpha){
+	double fhap_a;
+	fhap_a= 1+alpha*0.5+0.5*pow((alpha*(alpha+2)),0.5);
 }
+double fhap_b(double alpha){
+	double fhap_b;
+	fhap_b= 1+alpha*0.5-0.5*pow((alpha*(alpha+2)),0.5);
+}
+
 double feop(double fhap){
 	double feop;
 	feop=fhap;
@@ -74,6 +80,11 @@ double fa(double fhap,double rho_h,double v_h,double ka_o){
 	return(fa);
 }
 
+double ener_conf(rho_a,rho_h,v_a,v_h,mua_o,muh_o){
+	double ener_conf,cont_a,cont_b;
+	
+	return(ener_conf);
+}
 /*
 	Defino todas las constantes en un mismo lugar para que sea mas comodo
 
