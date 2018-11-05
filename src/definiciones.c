@@ -80,11 +80,26 @@ double fa(double fhap,double rho_h,double v_h,double ka_o){
 	return(fa);
 }
 
-double ener_conf(rho_a,rho_h,v_a,v_h,mua_o,muh_o){
+double ener_conf(double rho_a, double rho_h,double v_a,double v_h,double mua_o,double muh_o){
 	double ener_conf,cont_a,cont_b;
 	
 	return(ener_conf);
 }
+
+double rho_a_menos(double rho_a,double q_a, double psi){
+	double rho_a_menos;
+	rho_a_menos= rho_a* exp(-q_a*psi);
+	return(rho_a_menos);
+}
+
+double rho_h_mas(double rho_h,double q_h, double psi){
+	double rho_h_mas;
+	rho_h_mas= rho_h* exp(-q_h*psi);
+	return(rho_h_mas);
+}
+
+
+
 /*
 	Defino todas las constantes en un mismo lugar para que sea mas comodo
 
