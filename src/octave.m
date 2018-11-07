@@ -92,27 +92,27 @@ testec2=ecuacion2(1,0);
 %VOY A DIVIDIR LA ELIBRE EN CADA UNO DE LOS TERMINOS  Y  DESPUES LOS SUMO
 
 function EnLi_1(rho_a_menos,vol_a_menos, muo_a_menos)
-	EnLi_1=rho_a_menos*ln(rho_a_menos*v_a_menos)-1+muo_a_menos;
+	EnLi_1=rho_a_menos*log(rho_a_menos*v_a_menos)-1+muo_a_menos;
 endfunction
 testEl1=EnLi_1(1,1,1);
 
 function EnLi_2(rho_h_mas,vol_h_mas, muo_h_mas)
-	EnLi_2=rho_h_mas*ln(rho_h_mas*v_h_mas)-1+muo_h_mas;
+	EnLi_2=rho_h_mas*log(rho_h_mas*v_h_mas)-1+muo_h_mas;
 endfunction
 testEl2=EnLi_2(1,1,1);
 
 function EnLi_3(rho_o,f_ha,f_a,f_hap)
-	EnLi_3=rho_o*( f_ha*ln(f_ha)+ f_a*ln(f_a) +f_hap*ln(f_hap));
+	EnLi_3=rho_o*( f_ha*log(f_ha)+ f_a*log(f_a) +f_hap*log(f_hap));
 endfunction
 testEl3=EnLi_3(1,1,1,1);
 
 function EnLi_4(rho_o,f_eo,f_eop,beta,muo_eo)
-	EnLi_4=rho_o*( f_eo*ln(f_eo) +f_eop*ln(f_eop)	+f_eo*beta*muo_eo);
+	EnLi_4=rho_o*( f_eo*log(f_eo) +f_eop*log(f_eop)	+f_eo*beta*muo_eo);
 endfunction
 testLi_4=EnLi_4(1,1,1,1,1);
 
 function EnLi_5(rho_o,f_eop,beta,muo_eop,v_pair)
-	EnLi_5=rho_o*f_eop*( beta+muo_eop-ln(rho_o*f_eop+v_pair)+ 1 );
+	EnLi_5=rho_o*f_eop*( beta+muo_eop-log(rho_o*f_eop+v_pair)+ 1 );
 endfunction
 testLi5=EnLi_5(1,1,1,1,1);
 
