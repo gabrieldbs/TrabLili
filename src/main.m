@@ -53,14 +53,14 @@ for i=kd_min:1:kd_max
 		%%------------FSOLVE---------------%%
 		fun= @funcion_1; %% CHEQUEAR SI LA NOTACION ES CORRECTA
 		Xo=[0,0];
-		X= fsolve(fun,Xo); %% CHEQUEAR OPCIONES QUE SE LE PUEDE AGREGAR
+		X= fsolve(fun,Xo); %% CHEQUEAR OPCIONES QUE SE LE PUEDE AGREGAR FALTA VER QUE PASA CON RHO Y KD
 		%%---DEBERIA TENER PSI Y F_A----------%%
 		X(1)=f_a
 		X(2)=ps_i
 		f_a=X(1);
 		ps_i=X(2);
 		%%------ECUACIONES------------------%%
-		Y=funcion_2(f_a,ps_i) %% CHEQUEAR ORDEN
+		Y=funcion_2(f_a,ps_i) %% CHEQUEAR ORDEN FALTA VER RHOO Y KD
 		%%---------ELT-------------------%%
 		funcion_3()
 		
