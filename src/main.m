@@ -42,21 +42,30 @@ muo_eop=1;
 muo_a=1;
 muo_ha=1;
 
-for rho_o=rh_o_min: paso:rho_o_max
+for i=kd_min:1:kd_max
+	kd=10^i;
 
-	for i=kd_min:1:kd_max
-		kd=10^i;
-		%%------------FSOLVE---------------%%
+	for rho_o=rh_o_min: paso:rho_o_max
+
 		
+		%%------------FSOLVE---------------%%
+		funcion_1()
 		%%---DEBERIA TENER PSI Y F_A----------%%
-
+		
 		%%------ECUACIONES------------------%%
-
+		funcion_2()
 		%%---------ELT-------------------%%
-
+		funcion_3()
+		
+		%%-----------CUANDO SALGO DEL FOR QUIERO QUE AGREGUE UNA LINEA EN EL TXT-----
 	end
 	
-	%%-----------CUANDO SALGO DEL FOR QUIERO QUE AGREGUE UNA LINEA EN EL TXT-----
 
 end
 
+%--------------cosas que faltan---------------%
+
+%%funcion_1 que resuelva las ecuaciones
+%%funcion_2 que despues de tener psi y fa  consiga todas las demas
+%%funcion_3 que  resuelva la energia libre
+%%generar un comando que abra un archivo y llene con rho_0 y elibre para cada kd
