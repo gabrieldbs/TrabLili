@@ -1,4 +1,7 @@
 function F2 = funcion_2(f_a,ps_i)
+  %%-----------------------
+  % LA IDEA ES QUE F2 SEA UN ARRAY DE 8 VARIABLES RESUELTAS,
+  %F2=[f_a,f_ha,f_hap,f_eo,f_eop,rho_h_mas,rho_a_menos,psi]
   %%-------CONSTANTES-----------------%
   
   
