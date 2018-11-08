@@ -62,7 +62,7 @@ for i=kd_min:1:kd_max
 		%%------ECUACIONES------------------%%
 		Y=funcion_2(f_a,ps_i) %% CHEQUEAR ORDEN FALTA VER RHOO Y KD
 		%%---------ELT-------------------%%
-		funcion_3()
+		Etot=funcion_3(Y)	%% ACA LA IDEA ES QUE LA FUNCION  SUME  TODAS LAS CONTRIBUCIONESEN UNA ETOTAL
 		
 		%%-----------CUANDO SALGO DEL FOR QUIERO QUE AGREGUE UNA LINEA EN EL TXT-----
 	end
