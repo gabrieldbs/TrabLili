@@ -2,10 +2,8 @@
 % ACA EMPIEZO ARMAR EL PROGRAMA QUE ITERE ELIB EN FUNCION RHO_O Y KD
 %-------------------------%
 
-
-
 %---------------------------%
-%-------------------DEFINO VARIABLES-------------RHO_O Y KD--
+%-------------------DEFINO VARIABLES-------------RHO_O Y KD
 %---------------------------%
 
 %Defino El maximo , el minimo y el paso del rho_o
@@ -20,7 +18,7 @@ kd_max=-5;
 kd_min=10; 
 
 %---------------------------%
-%-------------------DEFINO CONSTANTES---------------
+%-------------------DEFINO CONSTANTES  A CHEQUEAR---------------
 %---------------------------%
 
 ka=1;
@@ -42,18 +40,27 @@ muo_eop=1;
 muo_a=1;
 muo_ha=1;
 
+%%-----------------ALGUNAS DEFINICIONES QUE VOY A USAR DENTRO DEL PROGRAMA--------------%%
+%%Xo va a ser la semilla de la convergencia
+%%X va a ser  la solucion f_a y ps_i
+%%Y va a ser un array con todas las variables resueltas
+%%--------------------------------------%%
+
 for i=kd_min:1:kd_max
 	kd=10^i;
 
 	for rho_o=rh_o_min: paso:rho_o_max
-
-		
 		%%------------FSOLVE---------------%%
-		funcion_1()
+		fun= @funcion_1; %% CHEQUEAR SI LA NOTACION ES CORRECTA
+		Xo=[0,0];
+		X= fsolve(fun,Xo); %% CHEQUEAR OPCIONES QUE SE LE PUEDE AGREGAR
 		%%---DEBERIA TENER PSI Y F_A----------%%
-		
+		X(1)=f_a
+		X(2)=ps_i
+		f_a=X(1);
+		ps_i=X(2);
 		%%------ECUACIONES------------------%%
-		funcion_2()
+		Y=funcion_2(f_a,ps_i) %% CHEQUEAR ORDEN
 		%%---------ELT-------------------%%
 		funcion_3()
 		
