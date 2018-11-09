@@ -2,6 +2,7 @@ function F2 = funcion_2(f_a,ps_i)
   %%-----------------------
   % LA IDEA ES QUE F2 SEA UN ARRAY DE 8 VARIABLES RESUELTAS,
   %F2=[f_a,psi,rho_h_mas,rho_a_menos,f_ha,f_hap,f_eo,f_eop]
+  %Y=[f_a (1),psi (2),rho_h_mas (3) ,rho_a_menos (4) ,f_ha (5) ,f_hap (6),f_eo (7),f_eop(8)]
   %%-------CONSTANTES-----------------%
   ka=1;
   bet_a=1;
