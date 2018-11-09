@@ -1,4 +1,4 @@
-function F = funcion_1(f_a,ps_i)
+function F = funcion_1(f_a,ps_i,rho_o,kd)
 
   %-------------------------------------ECUACIONES DEFINICIONES---------------------------------------------%
 
@@ -7,10 +7,8 @@ function F = funcion_1(f_a,ps_i)
   bet_a=0;
   rho_a=1;
   rho_h=1;
-  rho_o=1;
   q_a=0;
   q_h=0;
-  kd=1;
   ka=1;
 
   %ECUACIONES
