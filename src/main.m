@@ -10,7 +10,7 @@
 %n=cantidad de iteraciones
 
 rho_o_min=0.01;
-rho_o_min=0.99;
+rho_o_max=0.99;
 nrho=100;
 paso=(rho_o_min+rho_o_max)/nrho;
 %DE KD SOLO PONGO EL EXPONENTE PORQUE ES MAS FACIL PARA EL FOR 
@@ -22,14 +22,13 @@ kd_min=10;
 %---------------------------%
 
 ka=1;
-kd=1;
 rho_h=0.5;
 rho_a=0.5;
 bet_a=1;
 q_a=-1;
 q_h=1;
-ps_i=0;
-f_a=0.1;
+%ps_i=0;
+%f_a=0.1;
 vol_a_menos=1;
 vol_h_mas=1;
 vol_pair=1;
@@ -54,20 +53,20 @@ for i=kd_min:1:kd_max
 		fun= @funcion_1; %% CHEQUEAR SI LA NOTACION ES CORRECTA
 		Xo=[0,0];
 		X= fsolve(fun,Xo); %% CHEQUEAR OPCIONES QUE SE LE PUEDE AGREGAR FALTA VER QUE PASA CON RHO Y KD
+		%------------------aca  atras pueden haaber errores de notacion chequear%
+		
 		%%---DEBERIA TENER PSI Y F_A----------%%
-		X(1)=f_a
-		X(2)=ps_i
 		f_a=X(1);
 		ps_i=X(2);
 		%%------ECUACIONES------------------%%
-		Y=funcion_2(f_a,ps_i) %% CHEQUEAR ORDEN FALTA VER RHOO Y KD
+		Y=funcion_2(f_a,ps_i) %%  ACA LA IDEA ES TENER TODAS LAS VARIABLES
 		%%---------ELT-------------------%%
-		Etot=funcion_3(Y)	%% ACA LA IDEA ES QUE LA FUNCION  SUME  TODAS LAS CONTRIBUCIONESEN UNA ETOTAL
+		Etot=funcion_3(Y,rho_o)	%% ACA LA IDEA ES QUE LA FUNCION  SUME  TODAS LAS CONTRIBUCIONESEN UNA ETOTAL
 		
 		%%-----------CUANDO SALGO DEL FOR QUIERO QUE AGREGUE UNA LINEA EN EL TXT-----
+		
 	end
 	
-
 end
 
 %--------------cosas que faltan---------------%
