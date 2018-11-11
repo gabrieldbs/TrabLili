@@ -38,7 +38,7 @@ muo_eo=1;
 muo_eop=1;
 muo_a=1;
 muo_ha=1;
-
+epsi=2;
 %%-----------------ALGUNAS DEFINICIONES QUE VOY A USAR DENTRO DEL PROGRAMA--------------%%
 %%Xo va a ser la semilla de la convergencia
 %%X va a ser  la solucion f_a y ps_i
@@ -50,28 +50,35 @@ for i=kd_min:1:kd_max
 
 	for rho_o=rh_o_min: paso:rho_o_max
 		%%------------FSOLVE---------------%%
-		fun= @funcion_1; %% CHEQUEAR SI LA NOTACION ES CORRECTA
-		Xo=[0,0];
-		X= fsolve(fun,Xo); %% CHEQUEAR OPCIONES QUE SE LE PUEDE AGREGAR FALTA VER QUE PASA CON RHO Y KD
-		%------------------aca  atras pueden haaber errores de notacion chequear%
 		
-		%%---DEBERIA TENER PSI Y F_A----------%%
-		f_a=X(1);
-		ps_i=X(2);
-		%%------ECUACIONES------------------%%
-		Y=funcion_2(f_a,ps_i) %%  ACA LA IDEA ES TENER TODAS LAS VARIABLES
-		%%---------ELT-------------------%%
-		Etot=funcion_3(Y,rho_o)	%% ACA LA IDEA ES QUE LA FUNCION  SUME  TODAS LAS CONTRIBUCIONESEN UNA ETOTAL
-		
-		%%-----------CUANDO SALGO DEL FOR QUIERO QUE AGREGUE UNA LINEA EN EL TXT-----
+		%		LAS DOS FUNCIONES JUNTAS  COMO FUNC=[EQ1;EQ2]
+		Func =  @(X) [X(1)*(1+rho_h*(exp(-bet_a*X(2)*q_h))/ka)+(kd/ka)*rho_o*X(1)*rho_h*(exp(-bet_a*X(2)*q_h))*(X(1)+X(1)*rho_h*(exp(-bet_a*X(2)*q_h))/ka)-1; rho_a*exp(-bet_a*X(2)*q_a)+rho_o*X(1)+rho_h*exp(-bet_a*X(2)*q_h)]-1;
+		% CONDICIONES INICIALES PARA EL FSOLV Xo=[f_a,ps_i]%
+		Xo=[0.2,0.5];	%%
+		X= fsolve(Func,Xo); % ACA FALTA AGREGARLE LIMITES A LAS VARIABLES  TODABIA NO SE COMO HACERLO
+		check=sqrt(Func(X)(1)^2+Func(X)(2)^2 )
+		if (check<epsi)
+			%%---DEBERIA TENER PSI Y F_A----------%%
+			f_a=X(1);
+			ps_i=X(2);
+			%%------ECUACIONES------------------%%
+			Y=funcion_2(f_a,ps_i); %%  ACA LA IDEA ES TENER TODAS LAS VARIABLES
+			%%---------ELT-------------------%%
+			Etot=funcion_3(Y,rho_o);	%% ACA LA IDEA ES QUE LA FUNCION  SUME  TODAS LAS CONTRIBUCIONESEN UNA ETOTAL
+			%%-----------CUANDO SALGO DEL FOR QUIERO QUE AGREGUE UNA LINEA EN EL TXT-----
+			m=[rho_o,Etot];
+			fid = fopen('Ener_lib_'i'.txt', 'w');
+			fprintf(fid, 'rho_o \t Energia Libre\n\n');
+			fprintf(fid, '%f \t %f\n', m );
+			fclose(fid);
+			
+		end
 		
 	end
 	
 end
 
 %--------------cosas que faltan---------------%
-
-%%funcion_1 que resuelva las ecuaciones
-%%funcion_2 que despues de tener psi y fa  consiga todas las demas
-%%funcion_3 que  resuelva la energia libre
 %%generar un comando que abra un archivo y llene con rho_0 y elibre para cada kd
+
+
