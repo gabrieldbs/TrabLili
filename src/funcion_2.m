@@ -1,4 +1,4 @@
-function F2 = funcion_2(f_a,ps_i)
+function F2 = funcion_2(X)
   %%-----------------------
   % LA IDEA ES QUE F2 SEA UN ARRAY DE 8 VARIABLES RESUELTAS,
   %F2=[f_a,psi,rho_h_mas,rho_a_menos,f_ha,f_hap,f_eo,f_eop]
@@ -12,21 +12,21 @@ function F2 = funcion_2(f_a,ps_i)
   rho_a=1; 
   %-----------------VARIABLES---------------%
   
-  F2(1)=f_a;
-  F2(2)=ps_i;
-  rho_h_mas= rho_h*exp(-bet_a*ps_i*q_h);
+  F2(1)=X(1);
+  F2(2)=X(2);
+  rho_h_mas= rho_h*exp(-bet_a*X(2)*q_h);
   F2(3)=rho_h_mas;
-  rho_a_menos= rho_a*exp(-bet_a*ps_i*q_a);
+  rho_a_menos= rho_a*exp(-bet_a*X(2)*q_a);
   F2(4)=rho_h_menos;
   
-  f_ha = rho_h_mas*f_a/ka;
+  f_ha = rho_h_mas*X(1)/ka;
   F2(5)=f_ha;
-  f_hap = 1-f_a-rho_h_mas*f_a/ka;
+  f_hap = 1-X(1)-rho_h_mas*X(1)/ka;
   F2(6)=f_hap;
   
-  f_eo= f_a*(1+rho_h_mas/ka);
+  f_eo= X(1)*(1+rho_h_mas/ka);
   F2(7)=f_eo;
-  f_eop = 1-f_a-rho_h_mas*f_a/ka;
+  f_eop = 1-X(1)-rho_h_mas*X(1)/ka;
   F2(8)=f_eop;
   
  endfunction;
