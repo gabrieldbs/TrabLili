@@ -47,10 +47,14 @@ epsi=2;
 
 for i=kd_min:1:kd_max
 	kd=10^i;
-	fid = fopen('Ener_lib_'i'.txt', 'w');
+	fid = fopen('Ener_lib_%d.txt',i);
 	for rho_o=rh_o_min: paso:rho_o_max
-		%%------------FSOLVE---------------%%
-		
+		%%--SETEO A CERO ----------FSOLVE---------------%%
+		X=0;
+		Y=0;
+		Z=0;
+		Etot=0;
+		m=0;
 		%		LAS DOS FUNCIONES JUNTAS  COMO FUNC=[EQ1;EQ2]
 		Func =  @(X) [X(1)*(1+rho_h*(exp(-bet_a*X(2)*q_h))/ka)+(kd/ka)*rho_o*X(1)*rho_h*(exp(-bet_a*X(2)*q_h))*(X(1)+X(1)*rho_h*(exp(-bet_a*X(2)*q_h))/ka)-1; rho_a*exp(-bet_a*X(2)*q_a)+rho_o*X(1)+rho_h*exp(-bet_a*X(2)*q_h)-1;]
 		% CONDICIONES INICIALES PARA EL FSOLV Xo=[f_a,ps_i]%
@@ -73,14 +77,15 @@ for i=kd_min:1:kd_max
 			fprintf(fid, 'kd \t rho_o \t Energia Libre\n\n');
 			fprintf(fid, '%f \t %f \t %f\n', m(1),m(2),m(3)) );
 			fclose(fid);
-			
+	%	elseif() aca supongo que si no converge la solucion se puede corregir un par de cosas 
+	%		o la cantidad de iteraciones o redefinir Xo para volver a resolver,
+	%	else	en caso de que no converja  habría que armar un archivo que diga que para ese kd no hay sol
+	%		
 		end
 		
 	end
 	
 end
 
-%--------------cosas que faltan---------------%
-%%generar un comando que abra un archivo y llene con rho_0 y elibre para cada kd
 
 
