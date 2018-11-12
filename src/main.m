@@ -70,7 +70,7 @@ for i=kd_min:1:kd_max
 			%%-----------CUANDO SALGO DEL FOR QUIERO QUE AGREGUE UNA LINEA EN EL TXT-----
 			m=[kd,rho_o,Etot];
 			
-			fprintf(fid, 'rho_o \t Energia Libre\n\n');
+			fprintf(fid, 'kd \t rho_o \t Energia Libre\n\n');
 			fprintf(fid, '%f \t %f \t %f\n', m(1),m(2),m(3)) );
 			fclose(fid);
 			
