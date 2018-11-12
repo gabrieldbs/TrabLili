@@ -47,7 +47,7 @@ epsi=2;
 
 for i=kd_min:1:kd_max
 	kd=10^i;
-
+	fid = fopen('Ener_lib_'i'.txt', 'w');
 	for rho_o=rh_o_min: paso:rho_o_max
 		%%------------FSOLVE---------------%%
 		
@@ -59,17 +59,19 @@ for i=kd_min:1:kd_max
 		check=sqrt(Func(X)(1)^2+Func(X)(2)^2 )
 		if (check<epsi)
 			%%---DEBERIA TENER PSI Y F_A----------%%
-			f_a=X(1);
-			ps_i=X(2);
+			%f_a=X(1);
+			%ps_i=X(2);
 			%%------ECUACIONES------------------%%
-			Y=funcion_2(f_a,ps_i); %%  ACA LA IDEA ES TENER TODAS LAS VARIABLES
+			Y=funcion_2(X); %%  ACA LA IDEA ES TENER TODAS LAS VARIABLES
+			%F2=[f_a,psi,rho_h_mas,rho_a_menos,f_ha,f_hap,f_eo,f_eop]
+			Z=[Y,rho_o];
 			%%---------ELT-------------------%%
-			Etot=funcion_3(Y,rho_o);	%% ACA LA IDEA ES QUE LA FUNCION  SUME  TODAS LAS CONTRIBUCIONESEN UNA ETOTAL
+			Etot=funcion_3(Z);	%% ACA LA IDEA ES QUE LA FUNCION  SUME  TODAS LAS CONTRIBUCIONESEN UNA ETOTAL
 			%%-----------CUANDO SALGO DEL FOR QUIERO QUE AGREGUE UNA LINEA EN EL TXT-----
-			m=[rho_o,Etot];
-			fid = fopen('Ener_lib_'i'.txt', 'w');
+			m=[kd,rho_o,Etot];
+			
 			fprintf(fid, 'rho_o \t Energia Libre\n\n');
-			fprintf(fid, '%f \t %f\n', m );
+			fprintf(fid, '%f \t %f \t %f\n', m(1),m(2),m(3)) );
 			fclose(fid);
 			
 		end
