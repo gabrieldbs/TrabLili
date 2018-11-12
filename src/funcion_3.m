@@ -19,19 +19,19 @@ q=h=1;
 %%--------------------------VARIABLES--------------%
 
 
-  EnLi_1= Z(4)*(log(Z(4)*v_a_menos)-1+muo_a_menos);
+  EnLi_1= Z(4)*(log(Z(4)*v_a_menos)-1+bet_a*muo_a_menos);
 %----------------------------------------------%  
-  EnLi_2= Z(3)*(log(Z(3)*v_h_mas)-1+muo_h_mas);
+  EnLi_2= Z(3)*(log(Z(3)*v_h_mas)-1+bet_a*muo_h_mas);
 %---------------------------------------%
   EnLi_3= Z(9)*( Z(5)*log(Z(5))+ Z(1)*log(Z(1)) +Z(6)*log(Z(6)) );
 %---------------------------------------%
   EnLi_4=  Z(9)*( Z(7)*log(Z(7)) +Z(8)*log(Z(8)) +Z(7)*bet_a*muo_eo);
 %---------------------------------------%
-  EnLi_5= Z(9)*Z(8)*( bet_a*muo_eop-log(Z(9)*Z(8)+v_pair)+ 1 );
+  EnLi_5= Z(9)*Z(8)*( bet_a*muo_eop-log(Z(9)*Z(8)*v_pair)+ 1 );
 %---------------------------------------%
-  EnLi_6= Z(9)* (Z(5)*muo_ha+Z(1)*muo_a );
+  EnLi_6= Z(9)* (Z(5)*bet_a*muo_ha+Z(1)*bet_a*muo_a );
 %---------------------------------------%
-  EnLi_7=  Z(4)*mu_a_menos+Z(3)*mu_h_mas+mu_h*Z(5)*Z(9);
+  EnLi_7=  Z(4)*bet_a*mu_a_menos+Z(3)*bet_a*mu_h_mas+bet_a*mu_h*Z(5)*Z(9);
 %---------------------------------------%
   EnLi_8=  Z(2)*(Z(4)*q_a+Z(3)*q_h+Z(9)*Z(1)*q_a );
 
