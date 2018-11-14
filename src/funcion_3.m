@@ -36,6 +36,6 @@ q=h=1;
   EnLi_8=  Z(2)*(Z(4)*q_a+Z(3)*q_h+Z(9)*Z(1)*q_a );
 
 %------------------------------------------------------------------------------%
-  EnLiTot=EnLi_1EnLi_2+EnLi_3+EnLi_4+EnLi_5+EnLi_6+EnLi_7+EnLi_8;
+  EnLiTot=EnLi_1EnLi_2+EnLi_3+EnLi_4+EnLi_5+EnLi_6-EnLi_7+EnLi_8;
   F3=EnLiTot;
 endfunction;
