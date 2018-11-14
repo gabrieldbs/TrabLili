@@ -21,24 +21,23 @@ kd_min=10;
 %-------------------DEFINO CONSTANTES  A CHEQUEAR---------------
 %---------------------------%
 
-ka=1;
-rho_h=0.5;
-rho_a=0.5;
-bet_a=1;
-q_a=-1;
-q_h=1;
-%ps_i=0;
-%f_a=0.1;
-vol_a_menos=1;
+ka=1;			%---------------DATO--------------------%	
+rho_h=0.5;		%---------------ME PARECE QUE ESTABA VINCULADO CON EL MONOMERO--------------------%
+rho_a=0.5;		%---------------ME PARECE QUE ESTABA VINCULADO CON EL MONOMERO--------------------%
+bet_a=1;		% -------------SOLO FALTA T ---- BETA=1/KT---------%
+q_a=-1;			%---------------DATO--------------------%
+q_h=1;			%---------------DATO--------------------%
+
+vol_a_menos=1;		%-------------VOLUMENES------------%
 vol_h_mas=1;
-vol_pair=1;
-muo_a_menos=1;
-muo_h_mas=1;
+vol_pair=1;		%---------------VOLUMENES-------------------%
+muo_a_menos=1;		%--------------------- TODOS ESTOS MU HAY QUE  VER CUALES SON DATO.---.----%%%%%%
+muo_h_mas=1;		%---------------------  Y CUALES HAY QUE RELACIONAR CON EL NUEVO VINCULO--.%%%%%%
 muo_eo=1;
 muo_eop=1;
 muo_a=1;
-muo_ha=1;
-epsi=2;
+muo_ha=1;		% ----------------------------HASTA ACA MU---------------------------------------------%%%%%
+epsi=2;			% VA A SER EL LIMITE DEL CRITERIO A PEDIR DEL FSOLV	
 %%-----------------ALGUNAS DEFINICIONES QUE VOY A USAR DENTRO DEL PROGRAMA--------------%%
 %%Xo va a ser la semilla de la convergencia
 %%X va a ser  la solucion f_a y ps_i
