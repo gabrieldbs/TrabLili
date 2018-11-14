@@ -2,10 +2,6 @@
 % ACA EMPIEZO ARMAR EL PROGRAMA QUE ITERE ELIB EN FUNCION RHO_O Y KD
 %-------------------------%
 
-%---------------------------%
-%-------------------DEFINO VARIABLES-------------RHO_O Y KD
-%---------------------------%
-
 %Defino El maximo , el minimo y el paso del rho_o
 %n=cantidad de iteraciones
 
