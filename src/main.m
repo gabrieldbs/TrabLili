@@ -1,6 +1,6 @@
-%----------------------%
-% ACA EMPIEZO ARMAR EL PROGRAMA QUE ITERE ELIB EN FUNCION RHO_O Y KD
-%-------------------------%
+		%----------------------%
+		% ACA EMPIEZO ARMAR EL PROGRAMA QUE ITERE ELIB EN FUNCION RHO_O Y KD
+		%-------------------------%
 
 %Defino El maximo , el minimo y el paso del rho_o
 %n=cantidad de iteraciones
@@ -13,9 +13,9 @@ paso=(rho_o_min+rho_o_max)/nrho;
 kd_max=-5;
 kd_min=10; 
 
-%---------------------------%
-%-------------------DEFINO CONSTANTES  A CHEQUEAR---------------
-%---------------------------%
+			%---------------------------%
+			%-------------------DEFINO CONSTANTES  A CHEQUEAR---------------
+			%---------------------------%
 kboltz=1; %----buscar es 8.71creo o algo asi-----%
 ka=1;			%---------------DATO--------------------%	
 rho_h=0.5;		%---------------ME PARECE QUE ESTABA VINCULADO CON EL MONOMERO--------------------%
@@ -37,11 +37,13 @@ muo_a=1;
 muo_ha=1;		% ----------------------------HASTA ACA MU---------------------------------------------%%%%%
 
 epsi=1;			% VA A SER EL LIMITE DEL CRITERIO A PEDIR DEL FSOLV	
-%%-----------------ALGUNAS DEFINICIONES QUE VOY A USAR DENTRO DEL PROGRAMA--------------%%
+		%%-----------------ALGUNAS DEFINICIONES QUE VOY A USAR DENTRO DEL PROGRAMA--------------%%
 %%Xo va a ser la semilla de la convergencia
 %%X va a ser  la solucion f_a y ps_i
 %%Y va a ser un array con todas las variables resueltas
-%%--------------------------------------%%
+%%Z va ser Y mas rho_o en un array
+
+		%%--------------------------------------%%
 
 for i=kd_min:1:kd_max
 	kd=10^i;
@@ -53,12 +55,12 @@ for i=kd_min:1:kd_max
 		Z=0;
 		Etot=0;
 		m=0;
-		%		LAS DOS FUNCIONES JUNTAS  COMO FUNC=[EQ1;EQ2]
+		%		LAS DOS FUNCIONES JUNTAS  COMO FUNC=[EQ1;EQ2]; X(1)=f_a X(2)=ps_i
 		Func =  @(X) [X(1)*(1+rho_h*(exp(-bet_a*X(2)*q_h))/ka)+(kd/ka)*rho_o*X(1)*rho_h*(exp(-bet_a*X(2)*q_h))*(X(1)+X(1)*rho_h*(exp(-bet_a*X(2)*q_h))/ka)-1; rho_a*exp(-bet_a*X(2)*q_a)+rho_o*X(1)+rho_h*exp(-bet_a*X(2)*q_h)-1;]
 		% CONDICIONES INICIALES PARA EL FSOLV Xo=[f_a,ps_i]%
 		Xo=[0.2,0.5];	%%
 		X= fsolve(Func,Xo); % ACA FALTA AGREGARLE LIMITES A LAS VARIABLES  TODABIA NO SE COMO HACERLO
-		check=sqrt(Func(X)(1)^2+Func(X)(2)^2 )
+		check=sqrt(Func(X)(1)^2+Func(X)(2)^2 ) %Tenia pensado chequear si estan dando cero y en caso de que no  iterar mas veces
 		if (check<epsi)
 			%%---DEBERIA TENER PSI Y F_A----------%%
 			%f_a=X(1);
@@ -75,25 +77,34 @@ for i=kd_min:1:kd_max
 			fprintf(fid, 'kd \t rho_o \t Energia Libre\n\n');
 			fprintf(fid, '%f \t %f \t %f\n', m(1),m(2),m(3)) );
 			fclose(fid);
-	%	elseif(epsi < check & check <10*epsi)
-               X= fsolve(Func,Xo); % ACA FALTA AGREGARLE LIMITES A LAS VARIABLES  TODABIA NO SE COMO HACERLO
-               %mi idea es que si esta cerca un orden de magnitud pido que haga mas itrraciones para ver si llega 
-               %  aca supongo que si no converge la solucion se puede corregir un par de cosas 
-	           %  o la cantidad de iteraciones o redefinir Xo para volver a resolver,
-	            Y=funcion_2(X); %%  ACA LA IDEA ES TENER TODAS LAS VARIABLES
-			    %F2=[f_a,psi,rho_h_mas,rho_a_menos,f_ha,f_hap,f_eo,f_eop]
-			     Z=[Y,rho_o];
-			%%---------ELT-------------------%%
-			     Etot=funcion_3(Z);	%% ACA LA IDEA ES QUE LA FUNCION  SUME  TODAS LAS CONTRIBUCIONESEN UNA ETOTAL
-			%%-----------CUANDO SALGO DEL FOR QUIERO QUE AGREGUE UNA LINEA EN EL TXT-----
-			     m=[kd,rho_o,Etot];
 			
-			     fprintf(fid, 'kd \t rho_o \t Energia Libre\n\n');
-			     fprintf(fid, '%f \t %f \t %f\n', m(1),m(2),m(3)) );
-			     fclose(fid);
-	%	else	en caso de que no converja  habría que armar un archivo que diga que para ese kd no hay sol
-	%		supongo que sino funciona mejorando la cantidad de iteraciones hay que cambiar las comd iniciales 
-	%         puede ser que para ciertos valores de kd rhoo no hay solucion habria que contemplarlo 
+			% 	DE ACA EN ADELANTE NO ESTA TERMINADO %
+			
+			
+			%NO SE SI VALE LA PENA PERO MI IDEA ES SINO DA BIEN EL FSOLVE  LE PIDO QUE ITERE MAS VECES%
+			%	PARA VER SI ES UNA CUESTION DE CANTIDAD DE ITERACIONES				  %
+			%	Y SINO PENSABA  QUE SE PODRIA MODIFICAR LAS CONDICIONES INICIALES	 	  %
+			
+	%	elseif(epsi < check & check <10*epsi)
+                %	X= fsolve(Func,Xo); % 
+                %	mi idea es que si esta cerca a un orden de magnitud del limite que quiero pido que haga mas itrraciones para ver si llega 
+	        %       o la cantidad de iteraciones o redefinir Xo para volver a resolver,
+	        %	Y=funcion_2(X); %%  ACA LA IDEA ES TENER TODAS LAS VARIABLES
+		%	%F2=[f_a,psi,rho_h_mas,rho_a_menos,f_ha,f_hap,f_eo,f_eop]
+		%	Z=[Y,rho_o];
+			%---------ELT-------------------%%
+		%	Etot=funcion_3(Z);	%% ACA LA IDEA ES QUE LA FUNCION  SUME  TODAS LAS CONTRIBUCIONESEN UNA ETOTAL
+			%%-----------CUANDO SALGO DEL FOR QUIERO QUE AGREGUE UNA LINEA EN EL TXT-----
+		%	m=[kd,rho_o,Etot];
+		%	fprintf(fid, 'kd \t rho_o \t Energia Libre\n\n');
+		%	fprintf(fid, '%f \t %f \t %f\n', m(1),m(2),m(3)) );
+		%	fclose(fid);
+	%	else	en caso de que no converja  habría que armar un archivo que diga que para ese kd no hay sol,
+	%		o hay que cambiar las comd iniciales 
+	%        	puede ser que para ciertos valores de kd rhoo no hay solucion habria que contemplarlo
+	
+	
+		% 	HASTA ACA %
 		end
 		
 	end
