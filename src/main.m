@@ -44,10 +44,11 @@ epsi=1;			% VA A SER EL LIMITE DEL CRITERIO A PEDIR DEL FSOLV
 %%Z va ser Y mas rho_o en un array
 
 		%%--------------------------------------%%
-
-for i=kd_min:1:kd_max
+fid = fopen('Ener_lib_kd.txt',w);%aca no se si va w o s o sino va nada 
+%inicialmente queria abrir un archivo por cada kd pero voy a ver si no hago un solo .txt
+for i=kd_min:1:kd_max. 
 	kd=10^i;
-	fid = fopen('Ener_lib_%d.txt',i);
+	%fid = fopen('Ener_lib_%d.txt',i);  %esto es si quiero cada archivo separado 
 	for rho_o=rh_o_min: paso:rho_o_max
 		%%--SETEO A CERO ----------FSOLVE---------------%%
 		X=0;
@@ -85,23 +86,23 @@ for i=kd_min:1:kd_max
 			%	PARA VER SI ES UNA CUESTION DE CANTIDAD DE ITERACIONES				  %
 			%	Y SINO PENSABA  QUE SE PODRIA MODIFICAR LAS CONDICIONES INICIALES	 	  %
 			
-	%	elseif(epsi < check & check <10*epsi)
-                %	X= fsolve(Func,Xo); % 
+	%	elseif(epsi < check && check <10*epsi)
+                %	XX= fsolve(Func,X); %  hasta que revise options 
                 %	mi idea es que si esta cerca a un orden de magnitud del limite que quiero pido que haga mas itrraciones para ver si llega 
-	        %       o la cantidad de iteraciones o redefinir Xo para volver a resolver,
-	        %	Y=funcion_2(X); %%  ACA LA IDEA ES TENER TODAS LAS VARIABLES
-		%	%F2=[f_a,psi,rho_h_mas,rho_a_menos,f_ha,f_hap,f_eo,f_eop]
-		%	Z=[Y,rho_o];
-			%---------ELT-------------------%%
-		%	Etot=funcion_3(Z);	%% ACA LA IDEA ES QUE LA FUNCION  SUME  TODAS LAS CONTRIBUCIONESEN UNA ETOTAL
+	        %        o la cantidad de iteraciones o redefinir Xo para volver a resolver,
+	        %   	YY=funcion_2(XX); %%  ACA LA IDEA ES TENER TODAS LAS VARIABLES
+		    %	%F2=[f_a,psi,rho_h_mas,rho_a_menos,f_ha,f_hap,f_eo,f_eop]
+		    %	   ZZ=[YY,rho_o];
+			
+		    %	Etot=funcion_3(ZZ);	%% ACA LA IDEA ES QUE LA FUNCION  SUME  TODAS LAS CONTRIBUCIONESEN UNA ETOTAL
 			%%-----------CUANDO SALGO DEL FOR QUIERO QUE AGREGUE UNA LINEA EN EL TXT-----
 		%	m=[kd,rho_o,Etot];
 		%	fprintf(fid, 'kd \t rho_o \t Energia Libre\n\n');
 		%	fprintf(fid, '%f \t %f \t %f\n', m(1),m(2),m(3)) );
 		%	fclose(fid);
-	%	else	en caso de que no converja  habría que armar un archivo que diga que para ese kd no hay sol,
-	%		o hay que cambiar las comd iniciales 
-	%        	puede ser que para ciertos valores de kd rhoo no hay solucion habria que contemplarlo
+	    %	else	en caso de que no converja  habría que armar un archivo que diga que para ese kd no hay sol,
+	   %		o hay que cambiar las comd iniciales 
+	   %        	puede ser que para ciertos valores de kd rhoo no hay solucion habria que contemplarlo
 	
 	
 		% 	HASTA ACA %
