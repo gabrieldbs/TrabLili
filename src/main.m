@@ -87,24 +87,17 @@ for i=kd_min:1:kd_max
 			%	Y SINO PENSABA  QUE SE PODRIA MODIFICAR LAS CONDICIONES INICIALES	 	  %
 			
 		elseif(epsi < check && check <100*epsi)
-                	XX= fsolve(Func,X); %  hasta que revise options 
-                %	mi idea es que si esta cerca a un orden de magnitud del limite que quiero pido que haga mas itrraciones para ver si llega 
-	        %        o la cantidad de iteraciones o redefinir Xo para volver a resolver,
-	           	YY=funcion_2(XX); %%  ACA LA IDEA ES TENER TODAS LAS VARIABLES
-		    %	%F2=[f_a,psi,rho_h_mas,rho_a_menos,f_ha,f_hap,f_eo,f_eop]
-		    %	   ZZ=[YY,rho_o];
+                	XX= fsolve(Func,X); 
+	           	YY=funcion_2(XX); %% 
+		    	ZZ=[YY,rho_o];
 			
-		    %	Etot=funcion_3(ZZ);	%% ACA LA IDEA ES QUE LA FUNCION  SUME  TODAS LAS CONTRIBUCIONESEN UNA ETOTAL
+		    	Etot=funcion_3(ZZ);	%% ACA LA IDEA ES QUE LA FUNCION  SUME  TODAS LAS CONTRIBUCIONESEN UNA ETOTAL
 			%%-----------CUANDO SALGO DEL FOR QUIERO QUE AGREGUE UNA LINEA EN EL TXT-----
-		%	m=[rho_o,Etot];
-		%	fprintf(fid, '%f \t %f\n', m(1),m(2) );
-		%	fclose(fid);
+			m=[rho_o,Etot];
+			fprintf(fid, '%f \t %f\n', m(1),m(2) );
+			fclose(fid);
 	    %	else	en caso de que no converja  habría que armar un archivo que diga que para ese kd no hay sol,
-	   %		o hay que cambiar las comd iniciales 
-	   %        	puede ser que para ciertos valores de kd rhoo no hay solucion habria que contemplarlo
-	
-	
-		% 	HASTA ACA %
+	 
 		end
 		
 	end
