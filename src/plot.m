@@ -5,28 +5,45 @@
 % RHO_I ENER_I, POR HAY NO HACE FALTA GUARDAR TANTAS VECES RHO PERO POR LAS DUDAS EN PRINCIPIO LO GUARDO PARA CADA KD
 
 Energia = load('Ener_lib.txt');
-kd_min=-5;
-kd_max=10;
+kdmin=0;
+kdmax=5;
+nrho=100; %nrho  esto seria la cantidad de puntos que va a haber en  cada tira de  rho energia 
+%LA CANTIDAD DEPENDE DE LA CANTIDAD DE KD
+color(1) = 'r';
+color(2) = 'b';
+color(3) = 'g';
+color(4) = 'm';
+color(5) = 'k';
+
 %estos son los limites de kd 
-kd=['kd1','kd2','kd3']
+kd=['kd1','kd2','kd3','KD4','kd5']
 figure(1)
-for i=0:1:kd_max+abs(kd_min)        %% tengo pensado correr un for para el plo
-  xlabel('rho_o');
-  ylabel('Energy');
-  plot(Energia(:,i*2+1),Energia(:,i*2+2) ); 
-  legend(kd(3*0+1:3*0+3),kd(3*1+1:3*1+3),kd(3*2+1:3*2+3)) %% ESTO FALTA ARRREGLARLO LO QUE QUERIA ES METER LEGENDA EN KD
-  hold all;
+kdtot=kdmax+abs(kdmin);
+for i=0:1:kdtot-1
+  for j=1:1:nrho
+    xlabel('rho_o');
+    ylabel('Energy');
+    hold all
+    %Energia(i*(3)+j+1,2);
+    plot(Energia(i*(nrho+1)+j+1,1),Energia(i*(nrho+1)+j+1,2),color(i+1))
+    %legend(kd(3*0+1:3*0+3),kd(3*1+1:3*1+3),kd(3*2+1:3*2+3)) %% ESTO FALTA ARRREGLARLO LO QUE QUERIA ES METER LEGENDA EN KD
+    hold all;
+  end
 end
 print -dpng figure.png
 
-%aca la idea era armar muchos archivos me parece que no es conveniente
-%for i=1:kmax
-%  Energia = load(strcat('Ener_lib_%d.txt','i'));
-% figure(1)
-% hold on
-% plot(Ener_lib_1(:,2),Ener_lib_1(:,3))
-%  xlabel('rho_o');
-%  ylabel('Energy');
-%end
+%%POR COMO ESTOY PENSANDO EL ARCHIVO A CREAR VA A  TENER LA SIGUIENTE FORMA
+%   'RHO'  'ENERGIA' %PARA KDMIN, ESTOS SON CARACTERES
+%   RHO_MIN  ENERGIA(RHO_MIN)  %ESTOS SON VALORES
+%   ...
+%   ...
+%   RHO_MAX  ENERGIA(RHO_MAX) % HASTA ACÁ SERÍAN NRHO VALORES
+%   'RHO'  'ENERGIA' %PARA KDMIN+1, ESTOS SON CARACTERES
+%   RHO_MIN  ENERGIA(RHO_MIN)  %ESTOS SON VALORES
+%   ...
+%   ...
+%   RHO_MAX  ENERGIA(RHO_MAX) % HASTA ACÁ SERÍAN NRHO VALORES
+%   ETC..
+%%%%
 
 
