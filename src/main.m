@@ -75,31 +75,28 @@ for i=kd_min:1:kd_max
 			Etot=funcion_3(Z);	%% ACA LA IDEA ES QUE LA FUNCION  SUME  TODAS LAS CONTRIBUCIONESEN UNA ETOTAL
 			%%-----------CUANDO SALGO DEL FOR QUIERO QUE AGREGUE UNA LINEA EN EL TXT-----
 			m=[rho_o,Etot];
-			
 			fprintf(fid, '%f \t %f\n', m(1),m(2) );
 			fclose(fid);
 			
-			% 	DE ACA EN ADELANTE NO ESTA TERMINADO %
-			
-			
+						
 			%NO SE SI VALE LA PENA PERO MI IDEA ES SINO DA BIEN EL FSOLVE  LE PIDO QUE ITERE MAS VECES%
 			%	PARA VER SI ES UNA CUESTION DE CANTIDAD DE ITERACIONES				  %
 			%	Y SINO PENSABA  QUE SE PODRIA MODIFICAR LAS CONDICIONES INICIALES	 	  %
 			
 		elseif(epsi < check && check <100*epsi)
                 	XX= fsolve(Func,X); 
+			check=sqrt(Func(XX)(1)^2+Func(XX)(2)^2 );
+			
 	           	YY=funcion_2(XX); %% 
 		    	ZZ=[YY,rho_o];
-			
-		    	Etot=funcion_3(ZZ);	%% ACA LA IDEA ES QUE LA FUNCION  SUME  TODAS LAS CONTRIBUCIONESEN UNA ETOTAL
+			Etot=funcion_3(ZZ);	%% ACA LA IDEA ES QUE LA FUNCION  SUME  TODAS LAS CONTRIBUCIONESEN UNA ETOTAL
 			%%-----------CUANDO SALGO DEL FOR QUIERO QUE AGREGUE UNA LINEA EN EL TXT-----
 			m=[rho_o,Etot];
 			fprintf(fid, '%f \t %f\n', m(1),m(2) );
 			fclose(fid);
-	    %	else	en caso de que no converja  habría que armar un archivo que diga que para ese kd no hay sol,
-	 
+			
+	    	%else	%en caso de que no converja  habría que armar un archivo que diga que para ese kd no hay sol,	
 		end
-		
 	end
 	
 end
