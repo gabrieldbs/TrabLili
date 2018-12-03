@@ -1,7 +1,7 @@
 %path = '../../3D/bin/';
 %Energia = load(strcat(path,'Ener_lib_1.txt'));
 %% ACA MI IDEA ES ARMAR UN PROGRAMITA QUE PLOTEE
-% EN PRINCIPIO EL ARCHIVO  VA A TENER 2*(KD_MAX+ABS(KD_MIN) )  COLUMNAS
+% EN PRINCIPIO EL ARCHIVO  VA A TENER 2 COLUMNAS
 % RHO_I ENER_I, POR HAY NO HACE FALTA GUARDAR TANTAS VECES RHO PERO POR LAS DUDAS EN PRINCIPIO LO GUARDO PARA CADA KD
 
 Energia = load('Ener_lib.txt');
@@ -31,6 +31,8 @@ for i=0:1:kdtot-1
   end
 end
 print -dpng figure.png
+%falta la legend pero  debiera plotear 
+% está hecho para  5 kd diferentes despues hay que corregir eso 
 
 %%POR COMO ESTOY PENSANDO EL ARCHIVO A CREAR VA A  TENER LA SIGUIENTE FORMA
 %   'RHO'  'ENERGIA' %PARA KDMIN, ESTOS SON CARACTERES
