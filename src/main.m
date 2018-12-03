@@ -68,6 +68,7 @@ for i=kd_min:1:kd_max
 			%f_a=X(1);
 			%ps_i=X(2);
 			%%------ECUACIONES------------------%%
+			%% HABRIA QUE CONSIDERAR EL ERROR %
 			Y=funcion_2(X); %%  ACA LA IDEA ES TENER TODAS LAS VARIABLES
 			%F2=[f_a,psi,rho_h_mas,rho_a_menos,f_ha,f_hap,f_eo,f_eop]
 			Z=[Y,rho_o];
