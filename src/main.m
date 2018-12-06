@@ -15,21 +15,20 @@ paso=(rho_o_min+rho_o_max)/nrho;
 %DE KD SOLO PONGO EL EXPONENTE PORQUE ES MAS FACIL PARA EL FOR 
 kd_max=-5;
 kd_min=10; 
-
 			%---------------------------%
 			%-------------------DEFINO CONSTANTES  A CHEQUEAR---------------
 			%---------------------------%
-kboltz=1; %----buscar es 8.71creo o algo asi-----%
-ka=1;			%---------------DATO--------------------%	
-rho_h=0.5;		%---------------ME PARECE QUE ESTABA VINCULADO CON EL MONOMERO--------------------%
-rho_a=0.5;		%---------------ME PARECE QUE ESTABA VINCULADO CON EL MONOMERO--------------------%
-Temp=300;  % ------ creo que Kelvin es la unidad correcta ------%
-bet_a=1/(Temp*kboltz);		% -------------SOLO FALTA T ---- BETA=1/KT---------%
-q_a=-1;			%---------------DATO--------------------%
-q_h=1;			%---------------DATO--------------------%
+kboltz=8.617332*10^(-5);%-----------   [eV/K]  ----%
+ka=1;			%-------------  DATO--------------------%	
+rho_h=0.5;		%-------------  ME PARECE QUE ESTABA VINCULADO CON EL MONOMERO--------------------%
+rho_a=0.5;		%-------------  ME PARECE QUE ESTABA VINCULADO CON EL MONOMERO--------------------%
+Temp=300; 		% ------------   [K]   ------%
+bet_a=1/(Temp*kboltz);	% ------------  [1/eV] ---------%
+q_a=-1;			%-------------  [eV]   --------------------%
+q_h=1;			%-------------  [eV ]  --------------------%
 
 vol_a_menos=1;		%-------------VOLUMENES------------%
-vol_h_mas=1;
+vol_h_mas=1;		%
 vol_pair=1;		%---------------VOLUMENES-------------------%
 
 muo_a_menos=1;		%--------------------- TODOS ESTOS MU HAY QUE  VER CUALES SON DATO.---.----%%%%%%
