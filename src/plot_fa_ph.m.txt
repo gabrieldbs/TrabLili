@@ -1,0 +1,19 @@
+fa_ph_kd=load('fa_ph.txt');
+%ACA ESTOY CONSIDERANDO  5 CORRIDAS DE KD
+kdtot=5;
+color(1) = 'r';
+color(2) = 'b';
+color(3) = 'g';
+color(4) = 'm';
+color(5) = 'k';
+figure(1)
+for i=0:1:kdtot-1
+	for j=1:1:nph
+		hold all
+		xlabel('ph');
+		ylabel('f_a');
+		plot(fa_ph_kd(i*nph+j,1),fa_ph_kd(i*nph+j,2),color(i+1));
+		hold all;		
+	end
+end
+print figure.png
