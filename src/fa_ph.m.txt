@@ -29,9 +29,10 @@ fid = fopen('fa_ph.txt',a);%aca no se si va w o s o sino va nada
 	for kdexp=0:1:10
 		kd=10^(kdexp);
 		for ph=0:0.2:14
-			rho_h_bulk=10^(-ph);
+			rho_h_bulk=10^(-ph);	
 			rho_a_bulk=10^(-ph);
-			ka=10^(-ph);
+			ka=10^(-ph);		%% A CHEQUEAR O PREGUNTAR 
+			m=0;
 			f_A = 0.5;		 %% initial conditions for solver
 			psi = 0;		 %% initial conditions for solver
 			lbounds = [0 -inf];	 %% bounds of  f_A and psi
@@ -47,10 +48,11 @@ fid = fopen('fa_ph.txt',a);%aca no se si va w o s o sino va nada
 			fprintf(fid, '%f \t %f\n', m(1),m(2) );		
 		end
 	end
+	
 fclose(fid);
 end
 
-%%------------------funciones a solucionar--------------------%%%
+%%------------------funciones para fsolve--------------------%%%
 function  F = myfun(X)
     
 global bet_a
