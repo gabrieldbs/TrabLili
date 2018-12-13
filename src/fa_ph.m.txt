@@ -24,11 +24,14 @@ bet_a=96485/(Temp*8.3144);		% |e|/kT in V^-1
 %%-----------------ALGUNAS DEFINICIONES QUE VOY A USAR DENTRO DEL PROGRAMA--------------%%
 
 epsi=10^(-5);
-
-fid = fopen('fa_ph.txt',a);%aca no se si va w o s o sino va nada 
+phmax=14;
+paso=0.2;
+%fid = fopen('fa_ph.txt',a);%aca no se si va w o s o sino va nada 
 	for kdexp=0:1:10
 		kd=10^(kdexp);
-		for ph=0:0.2:14
+		i=0;
+		for ph=0:paso:phmax
+			i=i+1;
 			rho_h_bulk=10^(-ph);	
 			rho_a_bulk=10^(-ph);
 			ka=10^(-ph);		%% A CHEQUEAR O PREGUNTAR 
@@ -44,12 +47,12 @@ fid = fopen('fa_ph.txt',a);%aca no se si va w o s o sino va nada
 			%resnorm;	
 			psi = X(2);
 			f_A = X(1);
-			m=[ph f_A];
-			fprintf(fid, '%f \t %f\n', m(1),m(2) );		
+			m[kdexp*(ph_max/paso)+i]=[ph f_A];
+			%fprintf(fid, '%f \t %f\n', m(1),m(2) );		
 		end
 	end
 	
-fclose(fid);
+%fclose(fid);
 end
 
 %%------------------funciones para fsolve--------------------%%%
