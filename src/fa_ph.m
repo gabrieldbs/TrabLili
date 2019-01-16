@@ -30,17 +30,17 @@ bet_a=96485/(Temp*8.3144);		% |e|/kT in V^-1
 %%-----------------ALGUNAS DEFINICIONES QUE VOY A USAR DENTRO DEL PROGRAMA--------------%%
 
 epsi=10^(-5);
-phmax=60;
+phmax=40;
 paso=0.2;
 for kdexp=1:1:1
   kd=10^(kdexp);
-  kd=0;
+  kd=10;
   i=0;
   for iph=1:1:phmax
     ph=iph*paso;
     rho_h_bulk=10^(-ph);	
     rho_a_bulk=10^(-3)+10^(-ph);
-    ka=10^(-5);		
+    ka=10^(5);		
     f_A = 0.5;		 %% initial conditions for solver
     psi = 0;		 %% initial conditions for solver
     %lbounds = [0 -inf];	 %% bounds of  f_A and psi
@@ -49,21 +49,57 @@ for kdexp=1:1:1
     %options = optimset('Tolfun', 1E-12, 'TolX', 1e-12, 'MaxFunEvals', 10000);
     Func = @(X) [X(1)*(1+rho_h_bulk*(exp(-bet_a*X(2)))/ka)+(kd/ka)*rho_o*X(1)*rho_h_bulk*(exp(-bet_a*X(2)))*(X(1)+X(1)*rho_h_bulk*(exp(-bet_a*X(2)))/ka)-1;rho_a_bulk*exp(bet_a*X(2))+rho_o*X(1)-rho_h_bulk*exp(-bet_a*X(2))];
     %[X resnorm] = lsqnonlin(@myfun,Xo,lbounds,ubounds, options); 		
-    X = fsolve(Func,Xo); 
-   
-    %myfun(X);     
-    %resnorm;	
-    psi = X(2);
-    f_A = X(1);
-    f_ha = f_A*rho_h_bulk*(exp(-bet_a*psi))/ka;
-    f_hap =1-f_A-f_ha;
-    ph_a(iph)=ph;
-    m(iph,kdexp)=[X(1)];  % to plot f_A vs ph
-    n(iph,kdexp)=[f_ha];  % to plot f_ha vs ph
-   % o(iph,kdexp)=[f_hap];  % to plot f_hap vs ph
-    check(iph,kdexp)=[sqrt(Func(X)(1)^2+Func(X)(2)^2 )] ;
-    r(iph,kdexp)=[X(2)];  % to plot  psi vs ph
-    %fprintf(fid, '%f \t %f\n', m(1),m(2) );		
+    [X,fval,info] = fsolve(Func,Xo);
+    if (info==1)
+      %myfun(X);     
+      %resnorm;	
+      psi = X(2);
+      f_A = X(1);
+      f_ha = f_A*rho_h_bulk*(exp(-bet_a*psi))/ka;
+      f_hap =1-f_A-f_ha;
+      ph_a(iph)=ph;
+      m(iph,kdexp)=[X(1)];  % to plot f_A vs ph
+      n(iph,kdexp)=[f_ha];  % to plot f_ha vs ph
+     % o(iph,kdexp)=[f_hap];  % to plot f_hap vs ph
+      check(iph,kdexp)=[sqrt(Func(X)(1)^2+Func(X)(2)^2 )] ;
+      r(iph,kdexp)=[X(2)];  % to plot  psi vs ph
+      %fprintf(fid, '%f \t %f\n', m(1),m(2) );		
+    elseif (info==2)
+      [X,fval,info] = fsolve(Func,X);
+      ch=info;
+      %myfun(X);     
+      %resnorm;	
+      psi = X(2);
+      f_A = X(1);
+      f_ha = f_A*rho_h_bulk*(exp(-bet_a*psi))/ka;
+      f_hap =1-f_A-f_ha;
+      ph_a(iph)=ph;
+      m(iph,kdexp)=[X(1)];  % to plot f_A vs ph
+      n(iph,kdexp)=[f_ha];  % to plot f_ha vs ph
+     % o(iph,kdexp)=[f_hap];  % to plot f_hap vs ph
+      check(iph,kdexp)=[sqrt(Func(X)(1)^2+Func(X)(2)^2 )] ;
+      r(iph,kdexp)=[X(2)];  % to plot  psi vs ph
+      %fprintf(fid, '%f \t %f\n', m(1),m(2) );		  
+    else
+      [X,fval,info] = fsolve(Func,X);
+      [X,fval,info] = fsolve(Func,X);
+      [X,fval,info] = fsolve(Func,X);
+      [X,fval,info] = fsolve(Func,X);
+      ch2=info;
+      %myfun(X);     
+      %resnorm;	
+      psi = X(2);
+      f_A = X(1);
+      f_ha = f_A*rho_h_bulk*(exp(-bet_a*psi))/ka;
+      f_hap =1-f_A-f_ha;
+      ph_a(iph)=ph;
+      m(iph,kdexp)=[X(1)];  % to plot f_A vs ph
+      n(iph,kdexp)=[f_ha];  % to plot f_ha vs ph
+     % o(iph,kdexp)=[f_hap];  % to plot f_hap vs ph
+      check(iph,kdexp)=[sqrt(Func(X)(1)^2+Func(X)(2)^2 )] ;
+      r(iph,kdexp)=[X(2)];  % to plot  psi vs ph
+      %fprintf(fid, '%f \t %f\n', m(1),m(2) );		
+     end
   end
 
    hold all;
@@ -74,6 +110,8 @@ for kdexp=1:1:1
   hold all;
 end
 
+
+%clear all
 
 %fid = fopen('fa_ph.txt',"w");%aca no se si va w o s o sino va nada 
  %for kdexp=0:1:10
@@ -104,7 +142,7 @@ end
  % end
  %end
 %fclose(fidch);
-clear all
+
 %%------------------funciones para fsolve--------------------%%%
 %function  F = myfun(X)
     
