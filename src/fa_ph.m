@@ -34,7 +34,7 @@ phmax=60;
 paso=0.2;
 for kdexp=1:1:1
   kd=10^(kdexp);
-  kd=100;
+  kd=100000;
   i=0;
   for iph=1:1:phmax
     ph=iph*paso;
@@ -49,7 +49,8 @@ for kdexp=1:1:1
     Xo=[f_A,psi];		 %% CONDICIONES INICIALES PARA EL FSOLV Xo=[f_a,ps_i]%   
                 %options = optimset('Tolfun', 1E-12, 'TolX', 1e-12, 'MaxFunEvals', 10000);
   % Func = @(X) [X(1)*(1+rho_h_bulk*(exp(-bet_a*X(2)))/ka)+(kd/ka)*rho_o*X(1)*rho_h_bulk*(exp(-bet_a*X(2)))*(X(1)+X(1)*rho_h_bulk*(exp(-bet_a*X(2)))/ka)-1;rho_a_bulk*exp(bet_a*X(2))+rho_o*X(1)-rho_h_bulk*exp(-bet_a*X(2))];
-    Func_corr = @(X) [X(1)*(1+((rho_h_bulk*(exp(-bet_a*X(2))))/ka)+(rho_o*rho_h_bulk*(exp(-bet_a*X(2)))*vpair/(ka*(kd+rho_o*vpair))))-1;rho_a_bulk*exp(bet_a*X(2))+rho_o*X(1)-rho_h_bulk*exp(-bet_a*X(2))-rho_c_bulk*exp(-bet_a*X(2))];
+  %  Func_corr = @(X) [rho_o*vpair*X(1)*X(1)*(1+rho_h_bulk*(exp(-bet_a*X(2)))/ka)*rho_h_bulk*(exp(-bet_a*X(2)))-ka*kd*(1-X(1)-X(1)*rho_h_bulk*(exp(-bet_a*X(2)))/ka);rho_a_bulk*exp(bet_a*X(2))+rho_o*X(1)-rho_h_bulk*exp(-bet_a*X(2))-rho_c_bulk*exp(-bet_a*X(2))];
+    Func_corr = @(X) [X(1)*(1+rho_h_bulk*(exp(-bet_a*X(2)))/ka)+X(1)*X(1)*(kd*vpair*rho_o/ka)*rho_h_bulk*(exp(-bet_a*X(2)))*(1+rho_h_bulk*(exp(-bet_a*X(2)))/ka)-1;rho_a_bulk*exp(bet_a*X(2))+rho_o*X(1)-rho_h_bulk*exp(-bet_a*X(2))-rho_c_bulk*exp(-bet_a*X(2))];
     %[X resnorm] = lsqnonlin(@myfun,Xo,lbounds,ubounds, options);
     [X,fval,info] = fsolve(Func_corr,Xo);
     if (info==1)
