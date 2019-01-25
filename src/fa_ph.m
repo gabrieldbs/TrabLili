@@ -20,12 +20,14 @@ bet_a=96485/(Temp*8.3144);		% |e|/kT in V^-1
 
 phmax=70;
 paso=0.2;
-for kdexp=1:1:1
+kdleg=0;
+for kdexp=1:1:4
   kd=10^((kdexp-1)*2);
-  kd=0;
+  kdleg(kdexp)=10^((kdexp-1)*2);
+  
   i=0;
   for iph=1:1:phmax
-    ph=iph*paso-1;
+    ph=iph*paso;
     rho_h_bulk=10^(-ph);	
     rho_a_bulk=10^(-ph);
     rho_c_bulk=10^(-3);
@@ -72,14 +74,13 @@ for kdexp=1:1:1
                    %o(iph,kdexp)=[f_hap];  % to plot f_hap vs ph
       check(iph,kdexp)=[sqrt(Func_corr(X)(1)^2+Func_corr(X)(2)^2 )] ;
       r(iph,kdexp)=[X(2)];  % to plot  psi vs ph
-                   %fprintf(fid, '%f \t %f\n', m(1),m(2) );		
      end
      
   end
   figure (1)
-   hold all;
-  plot (ph_a(1,:),m(:,kdexp)',";f_{A};")
-  
+  hold all;
+  h=plot (ph_a(1,:),m(:,kdexp)');
+  legend (cellstr (num2str (kdleg')), "location", "northwest");hold on;
   %plot (ph_a(1,:),n(:,kdexp)',";f_{ha};")
   %plot (ph_a(1,:),o(:,kdexp)',";f_{hap};")
   %plot (ph_a(1,:),check(:,kdexp)',";check;")
