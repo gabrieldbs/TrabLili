@@ -77,6 +77,7 @@ for kdexp=1:1:4
      end
      
   end
+  calc_fa_05=min (abs(m(:,kdexp)-0.5))
   figure (1)
   hold all;
   h=plot (ph_a(1,:),m(:,kdexp)');
