@@ -77,10 +77,12 @@ for kdexp=1:1:4
      end
      
   end
-  calc_fa_05=min (abs(m(:,kdexp)-0.5))
+  [calc_fa_05,i]=min (abs(m(:,kdexp)-0.5))
+  pph(kdexp)=i*0.2;
   figure (1)
   hold all;
   h=plot (ph_a(1,:),m(:,kdexp)');
+  y=plot (pph(kdexp),m(i,kdexp)',"color", "m");
   legend (cellstr (num2str (kdleg')), "location", "northwest");hold on;
   %plot (ph_a(1,:),n(:,kdexp)',";f_{ha};")
   %plot (ph_a(1,:),o(:,kdexp)',";f_{hap};")
